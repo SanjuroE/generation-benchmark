@@ -1,11 +1,9 @@
 package dev.sanjuroe.generation;
 
-import java.io.IOException;
-
 public interface Unmarshaller {
 
-    default void init() {
+    default void init() throws Exception {
     }
 
-    Employee readEmployee(Parser parser) throws IOException;
+    Employee readEmployee(Parser parser) throws Throwable;
 }

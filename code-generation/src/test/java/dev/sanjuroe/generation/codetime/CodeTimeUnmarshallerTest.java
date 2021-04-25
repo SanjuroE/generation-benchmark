@@ -5,16 +5,13 @@ import dev.sanjuroe.generation.impl.DataInputParser;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.*;
 
 class CodeTimeUnmarshallerTest {
 
     @Test
-    void basicInput() throws IOException {
+    void basicInput() throws Throwable {
         // Given
         var unmarshaller = new CodeTimeUnmarshaller();
         unmarshaller.init();

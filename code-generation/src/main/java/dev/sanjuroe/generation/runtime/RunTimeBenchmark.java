@@ -29,7 +29,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package dev.sanjuroe.generation.codetime;
+package dev.sanjuroe.generation.runtime;
 
 import dev.sanjuroe.generation.Data;
 import dev.sanjuroe.generation.Employee;
@@ -46,23 +46,45 @@ import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-public class CodeTimeBenchmark {
+public class RunTimeBenchmark {
 
     byte[] input;
 
-    Unmarshaller unmarshaller;
+    Unmarshaller basicUnmarshaller;
+
+    Unmarshaller deployUnmarshaller;
+
+    Unmarshaller handleUnmarshaller;
 
     @Setup
     public void setup() throws Exception {
         this.input = Data.generateEmployee();
-        this.unmarshaller = new CodeTimeUnmarshaller();
-        this.unmarshaller.init();
+        this.basicUnmarshaller = new BasicRunTimeUnmarshaller();
+        this.basicUnmarshaller.init();
+        this.deployUnmarshaller = new DeployRunTimeUnmarshaller();
+        this.deployUnmarshaller.init();
+        this.handleUnmarshaller = new HandleRunTimeUnmarshaller();
+        this.handleUnmarshaller.init();
     }
 
     @Benchmark
-    public Employee benchmark() throws Throwable {
+    public Employee basic() throws Throwable {
         var parser = new DataInputParser(new ByteArrayInputStream(input));
 
-        return unmarshaller.readEmployee(parser);
+        return basicUnmarshaller.readEmployee(parser);
+    }
+
+    @Benchmark
+    public Employee deploy() throws Throwable {
+        var parser = new DataInputParser(new ByteArrayInputStream(input));
+
+        return deployUnmarshaller.readEmployee(parser);
+    }
+
+    @Benchmark
+    public Employee handle() throws Throwable {
+        var parser = new DataInputParser(new ByteArrayInputStream(input));
+
+        return handleUnmarshaller.readEmployee(parser);
     }
 }
