@@ -3,14 +3,15 @@ package dev.sanjuroe.generation.runtime;
 import dev.sanjuroe.generation.Employee;
 import dev.sanjuroe.generation.Parser;
 import dev.sanjuroe.generation.Unmarshaller;
+import dev.sanjuroe.generation.util.ReflectionUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 
-public class BasicRunTimeUnmarshaller implements Unmarshaller {
+public class BasicRunTimeUnmarshaller implements Unmarshaller<Employee> {
 
     @Override
-    public Employee readEmployee(Parser parser) throws IOException, ReflectiveOperationException {
+    public Employee read(Parser parser) throws IOException, ReflectiveOperationException {
         Class<?> clazz = Employee.class;
 
         var employee = (Employee) clazz.getDeclaredConstructor().newInstance();

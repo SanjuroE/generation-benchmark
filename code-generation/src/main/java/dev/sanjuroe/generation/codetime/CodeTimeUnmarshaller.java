@@ -6,10 +6,10 @@ import dev.sanjuroe.generation.Unmarshaller;
 
 import java.io.IOException;
 
-public class CodeTimeUnmarshaller implements Unmarshaller {
+public class CodeTimeUnmarshaller implements Unmarshaller<Employee> {
 
     @Override
-    public Employee readEmployee(Parser parser) throws IOException {
+    public Employee read(Parser parser) throws IOException {
         var employee = new Employee();
 
         employee.setId(parser.readInteger());

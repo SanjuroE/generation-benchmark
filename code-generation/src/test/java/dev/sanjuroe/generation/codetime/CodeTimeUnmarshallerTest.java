@@ -19,7 +19,7 @@ class CodeTimeUnmarshallerTest {
         var parser = new DataInputParser(new ByteArrayInputStream(buf));
 
         // When
-        var employee = unmarshaller.readEmployee(parser);
+        var employee = unmarshaller.read(parser);
 
         // Then
         assertThat(employee.getId()).isEqualTo(101);

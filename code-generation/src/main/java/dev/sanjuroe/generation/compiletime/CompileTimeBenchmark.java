@@ -29,8 +29,9 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package dev.sanjuroe.generation.codetime;
+package dev.sanjuroe.generation.compiletime;
 
+import dev.sanjuroe.generation.EmployeeUnmarshaller;
 import dev.sanjuroe.generation.Data;
 import dev.sanjuroe.generation.Employee;
 import dev.sanjuroe.generation.Unmarshaller;
@@ -46,7 +47,7 @@ import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-public class CodeTimeBenchmark {
+public class CompileTimeBenchmark {
 
     byte[] input;
 
@@ -55,7 +56,7 @@ public class CodeTimeBenchmark {
     @Setup
     public void setup() throws Exception {
         this.input = Data.generateEmployee();
-        this.unmarshaller = new CodeTimeUnmarshaller();
+        this.unmarshaller = new EmployeeUnmarshaller();
         this.unmarshaller.init();
     }
 

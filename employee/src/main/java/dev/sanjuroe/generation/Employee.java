@@ -1,5 +1,8 @@
 package dev.sanjuroe.generation;
 
+import dev.sanjuroe.generation.annotation.Bean;
+
+@Bean
 public class Employee {
 
     private int id;

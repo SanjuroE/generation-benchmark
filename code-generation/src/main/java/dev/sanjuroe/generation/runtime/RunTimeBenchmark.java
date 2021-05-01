@@ -68,23 +68,23 @@ public class RunTimeBenchmark {
     }
 
     @Benchmark
-    public Employee basic() throws Throwable {
+    public Object basic() throws Throwable {
         var parser = new DataInputParser(new ByteArrayInputStream(input));
 
-        return basicUnmarshaller.readEmployee(parser);
+        return basicUnmarshaller.read(parser);
     }
 
     @Benchmark
-    public Employee deploy() throws Throwable {
+    public Object deploy() throws Throwable {
         var parser = new DataInputParser(new ByteArrayInputStream(input));
 
-        return deployUnmarshaller.readEmployee(parser);
+        return deployUnmarshaller.read(parser);
     }
 
     @Benchmark
-    public Employee handle() throws Throwable {
+    public Object handle() throws Throwable {
         var parser = new DataInputParser(new ByteArrayInputStream(input));
 
-        return handleUnmarshaller.readEmployee(parser);
+        return handleUnmarshaller.read(parser);
     }
 }

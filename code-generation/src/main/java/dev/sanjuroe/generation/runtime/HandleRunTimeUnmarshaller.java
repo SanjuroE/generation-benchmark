@@ -3,6 +3,7 @@ package dev.sanjuroe.generation.runtime;
 import dev.sanjuroe.generation.Employee;
 import dev.sanjuroe.generation.Parser;
 import dev.sanjuroe.generation.Unmarshaller;
+import dev.sanjuroe.generation.util.ReflectionUtils;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -11,7 +12,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HandleRunTimeUnmarshaller implements Unmarshaller {
+public class HandleRunTimeUnmarshaller implements Unmarshaller<Employee> {
 
     private FieldInfo[] fields;
 
@@ -38,7 +39,7 @@ public class HandleRunTimeUnmarshaller implements Unmarshaller {
     }
 
     @Override
-    public Employee readEmployee(Parser parser) throws Throwable {
+    public Employee read(Parser parser) throws Throwable {
         var employee = (Employee) constructor.newInstance();
 
         for (FieldInfo field : fields) {
