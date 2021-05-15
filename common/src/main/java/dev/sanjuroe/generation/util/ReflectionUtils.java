@@ -21,4 +21,20 @@ public class ReflectionUtils {
             throw new IllegalArgumentException("Unsupported type");
         }
     }
+
+    public static Class<?> loadClass(String className, byte[] ba, ClassLoader parent) throws ClassNotFoundException {
+        var loader = new ClassLoader(parent) {
+            @Override
+            protected Class<?> findClass(String name) throws ClassNotFoundException {
+                if (className.equals(name)) {
+                    return defineClass(name, ba, 0, ba.length);
+                }
+                throw new ClassNotFoundException();
+            }
+        };
+
+        Class<?> asmClass;
+        asmClass = loader.loadClass(className);
+        return asmClass;
+    }
 }
